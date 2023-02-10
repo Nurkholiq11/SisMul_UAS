@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { lazy, useContext, useEffect } from 'react';
 
-function App() {
+// third party
+import { Routes, Route, useNavigate } from 'react-router-dom';
+
+// project imports
+import Loadable from 'ui-component/Loadable';
+
+// pages
+// auth
+const AuthPage = Loadable(lazy(() => import('views/auth')));
+// teacher
+const TeacherPage = Loadable(lazy(() => import('views/pages/teacher')));
+// student
+const StudentPage = Loadable(lazy(() => import('views/pages/student')));
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<AuthPage />} />
+      <Route path="/login" element={<TeacherPage />} />
+      <Route path="/login" element={<StudentPage />} />
+      {/* <Route path="/" element={<AdminLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/work-visit" element={<WorkVisitPage />} />
+        <Route path="/user-management" element={<UserManagementPage />} />
+        <Route path="/user-management-add-form" element={<UserManagementAddForm />} />
+      </Route> */}
+    </Routes>
   );
 }
-
-export default App;
